@@ -4,187 +4,576 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eduardo da Silva</title>
-  <meta name="description" content="Eduardo da Silva, PhD student in Production Engineering at UFPE." />
+  <meta name="description" content="Eduardo da Silva, PhD student in Production Engineering at UFPE. Dengue surveillance, decision support and operations research." />
+  <meta name="author" content="Eduardo da Silva" />
   <style>
+    :root {
+      --azure: #1d6fa3;
+      --cyan: #05c3c8;
+      --navy: #0b2545;
+      --ice: #eaf4fb;
+      --paper: #f5f9fc;
+      --ink: #0f1d2e;
+      --ink-soft: #3d5067;
+      --ink-faint: #6b7d93;
+      --line: #d5e3ef;
+      --card: #ffffff;
+      --grad: linear-gradient(135deg, #0b2545 0%, #13315c 35%, #1d6fa3 75%, #05c3c8 100%);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #0a1624;
+        --ice: #0f2236;
+        --ink: #e6eef6;
+        --ink-soft: #afc2d6;
+        --ink-faint: #7f95ab;
+        --line: #1c3248;
+        --card: #0e1d2d;
+        color-scheme: dark;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
     body {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 3rem 1.25rem 4rem;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.05rem;
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
       line-height: 1.65;
-      color: #222;
+      -webkit-font-smoothing: antialiased;
     }
 
-    header img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      float: right;
-      margin: 0 0 1rem 1.5rem;
-    }
+    a { color: var(--azure); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    h1 {
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 37, 69, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .nav .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      min-height: 58px;
+    }
+    .nav .brand { color: #fff; font-weight: 700; }
+    .nav .brand:hover { text-decoration: none; }
+    .nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.3rem;
+      margin: 0;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+    .nav ul a { color: #c9daea; }
+    .nav ul a:hover { color: var(--cyan); text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      background: var(--grad);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+    .hero .wrap {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 3rem;
+      align-items: center;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+      line-height: 1.1;
+      margin: 0 0 0.75rem;
+    }
+    .hero .role {
+      font-size: 1.1rem;
+      color: #d7e6f3;
+      margin: 0 0 1.75rem;
+    }
+    .hero .summary-short {
+      color: #d7e6f3;
+      max-width: 60ch;
+      margin: 0 0 1.75rem;
+    }
+    .btns { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+    }
+    .btn:hover { text-decoration: none; background: rgba(255,255,255,0.12); }
+    .btn.solid { background: #fff; color: var(--navy); border-color: #fff; }
+    .btn.solid:hover { background: #e6f7f8; }
+
+    .portrait {
+      width: 220px;
+      height: 220px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+      background: rgba(255,255,255,0.08);
+      justify-self: center;
+      position: relative;
+    }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Sections */
+    section { padding: 4rem 0; border-top: 1px solid var(--line); }
+    section.alt { background: var(--ice); }
+
+    .kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--azure);
+      margin: 0 0 0.5rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-weight: 400;
       font-size: 2rem;
-      font-weight: normal;
-      margin: 0 0 0.25rem;
-    }
-
-    .subtitle {
-      color: #555;
+      line-height: 1.2;
       margin: 0 0 1.5rem;
     }
+    p { margin: 0 0 1rem; max-width: 68ch; color: var(--ink-soft); }
+    strong { color: var(--ink); }
 
-    h2 {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin: 2.5rem 0 1rem;
-      padding-bottom: 0.3rem;
-      border-bottom: 1px solid #ddd;
+    /* Education cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
     }
-
-    p { margin: 0 0 0.9rem; }
-
-    ul, ol {
-      padding-left: 1.3rem;
-      margin: 0 0 1rem;
+    .card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.5rem;
+      overflow: hidden;
     }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--grad);
+    }
+    .card .when {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--azure);
+      margin-bottom: 0.5rem;
+    }
+    .card h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.25rem;
+      line-height: 1.3;
+      margin: 0 0 0.5rem;
+      color: var(--ink);
+    }
+    .card p { margin: 0; font-size: 0.95rem; }
+    .card.feature {
+      grid-column: 1 / -1;
+      background: var(--grad);
+      border: none;
+      color: #fff;
+    }
+    .card.feature::before { display: none; }
+    .card.feature .when { color: #9ce9ec; }
+    .card.feature h3 { color: #fff; font-size: 1.5rem; }
+    .card.feature p { color: #d7e6f3; }
 
-    li { margin-bottom: 0.5rem; }
+    /* Publications */
+    .pubs { list-style: none; padding: 0; margin: 0; counter-reset: p; }
+    .pubs li {
+      counter-increment: p;
+      position: relative;
+      padding: 1rem 1.25rem 1rem 3.75rem;
+      margin-bottom: 0.8rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+    .pubs li::before {
+      content: counter(p, decimal-leading-zero);
+      position: absolute;
+      left: 1.1rem;
+      top: 1rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--cyan);
+    }
+    .pubs em { color: var(--ink); font-style: normal; font-weight: 600; }
 
-    .item-date {
-      color: #666;
+    /* Projects */
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .project {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--azure);
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+    }
+    .project h3 {
+      font-size: 1.1rem;
+      margin: 0 0 0.4rem;
+      color: var(--ink);
+    }
+    .project p { margin: 0 0 0.6rem; font-size: 0.95rem; }
+    .project a { font-weight: 600; font-size: 0.92rem; }
+
+    /* Experience */
+    .timeline {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--azure), var(--cyan));
+    }
+    .timeline li {
+      position: relative;
+      padding: 0 0 1.5rem 2.25rem;
+    }
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 3px solid var(--azure);
+    }
+    .timeline .when {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--azure);
+      margin-bottom: 0.15rem;
+    }
+    .timeline p { margin: 0.25rem 0 0; font-size: 0.95rem; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .two-col h3 {
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 0 0 0.75rem;
+    }
+    .simple-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+    .simple-list li {
+      padding: 0.55rem 0 0.55rem 1rem;
+      border-left: 2px solid var(--line);
+      color: var(--ink-soft);
       font-size: 0.95rem;
     }
 
-    a { color: #1a4f8b; }
+    /* Contact */
+    .contact {
+      background: var(--grad);
+      color: #fff;
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+    }
+    .contact .kicker { color: #9ce9ec; }
+    .contact h2 { color: #fff; }
+    .contact p { color: #d7e6f3; }
 
     footer {
-      margin-top: 3rem;
-      padding-top: 1rem;
-      border-top: 1px solid #ddd;
-      color: #666;
-      font-size: 0.92rem;
+      padding: 2rem 0 3rem;
+      color: var(--ink-faint);
+      font-size: 0.88rem;
     }
 
-    @media (max-width: 500px) {
-      header img { float: none; margin: 0 0 1rem; }
+    @media (max-width: 860px) {
+      .hero .wrap { grid-template-columns: 1fr; }
+      .portrait { width: 180px; height: 180px; order: -1; }
+      .two-col { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 3rem 0; }
+      .contact { padding: 2.25rem 1.5rem; }
+      h2 { font-size: 1.7rem; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <img src="foto.jpg" alt="Eduardo da Silva" />
-  <h1>Eduardo da Silva</h1>
-  <p class="subtitle">PhD student in Production Engineering, Universidade Federal de Pernambuco (UFPE)</p>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Eduardo da Silva</a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<h2>Summary</h2>
-<p>
-  I work with statistical modeling, multicriteria decision methods and machine learning to support
-  decisions in public health and operations. My recent research focuses on dengue surveillance in Brazil.
-</p>
-<p>
-  Contact: <a href="mailto:eduardo.es@ufpe.br">eduardo.es@ufpe.br</a> ·
-  <a href="http://lattes.cnpq.br/9698302403435499">Lattes</a> ·
-  <a href="https://orcid.org/0000-0002-2455-2294">ORCID</a> ·
-  <a href="https://www.linkedin.com/in/eng-eduardo-silva/">LinkedIn</a>
-</p>
+<main id="top">
 
-<h2>Education</h2>
-<ul>
-  <li>
-    <strong>PhD in Production Engineering</strong>, Universidade Federal de Pernambuco (UFPE), 2025 to present.
-    Sandwich period at the University of Exeter. Advisor: Prof. Maisa Mendonça Silva.
-  </li>
-  <li>
-    <strong>MSc in Production Engineering</strong>, UFPE, 2023 to 2025.
-    Dissertation on zero-inflated models and panel data for dengue cases in Pernambuco.
-  </li>
-  <li>
-    <strong>Specialization in Data Science and Analytics</strong>, Universidade de São Paulo (USP/ESALQ), in progress.
-  </li>
-  <li>
-    <strong>Specialization in Artificial Intelligence and Data Science</strong>, Escola Superior de Planejamento e Gestão (ESPG), 2023 to 2024.
-  </li>
-  <li>
-    <strong>BSc in Production Engineering</strong>, Associação Caruaruense de Ensino Superior (ASCES-UNITA), 2018 to 2022.
-  </li>
-</ul>
+  <div class="hero" id="summary">
+    <div class="wrap">
+      <div>
+        <h1>Eduardo da Silva</h1>
+        <p class="role">PhD student in Production Engineering, Universidade Federal de Pernambuco (UFPE)</p>
+        <p class="summary-short">
+          I work with statistical modeling, multicriteria decision methods and machine learning. My recent
+          research focuses on dengue surveillance and decision support in Brazil.
+        </p>
+        <div class="btns">
+          <a class="btn solid" href="https://dengue-sphere.streamlit.app/" target="_blank" rel="noopener">DengueSphere</a>
+          <a class="btn" href="http://lattes.cnpq.br/9698302403435499" target="_blank" rel="noopener">Lattes</a>
+          <a class="btn" href="https://orcid.org/0000-0002-2455-2294" target="_blank" rel="noopener">ORCID</a>
+        </div>
+      </div>
 
-<h2>Articles and proceedings</h2>
-<ol>
-  <li>
-    Silva, E. da, Economou, T., &amp; Silva, M. M. (2026).
-    A decision support system applied to dengue epidemiological surveillance: the DengueSphere platform.
-    <em>Proceedings of the 12th International Conference on Decision Support System Technology (ICDSST 2026)</em>, Plymouth, UK.
-  </li>
-  <li>
-    Silva, E. da &amp; Silva, M. M. (2026).
-    Combined approach between Value-Focused Thinking and the FITradeoff DSS for environmental surveillance of
-    <em>Aedes aegypti</em> in Recife, Brazil.
-    <em>LVIII Simpósio Brasileiro de Pesquisa Operacional (SBPO)</em>, Belo Horizonte.
-  </li>
-  <li>
-    Silva, E. da &amp; Silva, M. M. (2025).
-    Statistical modeling of dengue cases in Pernambuco: panel data and zero-inflated negative binomial regression.
-    <em>IX Encontro de Pesquisa e Pós-Graduação em Engenharia de Produção (EPPGEP)</em>, Porto Alegre.
-  </li>
-  <li>
-    Silva, E. da &amp; Silva, M. M. (2024).
-    Main machine learning tools applied to solid waste: a bibliometric study.
-    <em>ENEGEP 2024</em>, Porto Alegre.
-  </li>
-  <li>
-    Filho, J. M. P., Oliveira, H. M., Silva, E. da, Bernardo, L. F., &amp; Siqueira, Y. M. (2023).
-    Benefits of implementing Industry 4.0 through its tools: a literature review.
-    <em>ENEGEP 2023</em>, Fortaleza.
-  </li>
-  <li>
-    Filho, J. M. P., Silva, E. da, Silva, E. W. B. da, Oliveira, R. V. M. de, &amp; Oliveira, H. M. de (2022).
-    Industry 4.0 in production engineering: a bibliometric study.
-    <em>ENEGEP 2022</em>, Foz do Iguaçu.
-  </li>
-  <li>
-    Melo, M. O. B. C., Fonseca, D. C. F., Silva, E., Pereira Filho, J. M., &amp; Silva, M. V. A. O. (2019).
-    The business management in the model of the economy of communion: case study in Brazil.
-    <em>Iberoamerican Journal of Industrial Engineering</em>, 11, 77-91.
-  </li>
-</ol>
+      <div class="portrait">
+        <img src="foto.jpg" alt="Eduardo da Silva" onerror="this.style.display='none'" />
+      </div>
+    </div>
+  </div>
 
-<h2>Projects</h2>
-<ul>
-  <li>
-    <strong>DengueSphere</strong>, decision support platform for dengue surveillance in Brazil.
-    Software registered with INPI (2025). <a href="https://dengue-sphere.streamlit.app/">Open the application</a>.
-  </li>
-  <li>
-    <strong>Dengue News Intelligence</strong>, news monitoring panel developed at GPSID, UFPE.
-    Software registered with INPI (2026). <a href="https://dni.labgpsid.com.br">Open the dashboard</a>.
-  </li>
-</ul>
+  <section id="education" class="alt">
+    <div class="wrap">
+      <p class="kicker">Education</p>
+      <h2>Formation</h2>
 
-<h2>Experience</h2>
-<ul>
-  <li>
-    <strong>Research fellow (bolsista pesquisador), Banco Bradesco</strong>, 2026.
-    IEL Inova Talentos programme, with data science projects that include machine learning, language models and monitoring dashboards.
-  </li>
-  <li>
-    <strong>Teaching assistant</strong>, Regression Analysis for Production (EP077), UFPE, 2024 to 2025.
-  </li>
-</ul>
+      <div class="cards">
+        <div class="card feature">
+          <span class="when">2025 to present</span>
+          <h3>PhD in Production Engineering</h3>
+          <p>
+            Universidade Federal de Pernambuco (UFPE). Sandwich period at the University of Exeter.
+            Advisor: Prof. Maisa Mendonça Silva. Co-advisor: Prof. Theo Economou.
+          </p>
+        </div>
 
-<h2>Awards</h2>
-<ul>
-  <li>First place, Innovative Article category, IEL Inova Talentos Award (2026).</li>
-  <li>Outstanding student, PPGEP-UFPE, Master's dissertation category, ANPEPRO (2025).</li>
-</ul>
+        <div class="card">
+          <span class="when">2023 to 2025</span>
+          <h3>MSc in Production Engineering</h3>
+          <p>UFPE. Dissertation on zero-inflated models and panel data for dengue cases in Pernambuco.</p>
+        </div>
+
+        <div class="card">
+          <span class="when">In progress</span>
+          <h3>Specialization in Data Science and Analytics</h3>
+          <p>Universidade de São Paulo (USP/ESALQ).</p>
+        </div>
+
+        <div class="card">
+          <span class="when">2023 to 2024</span>
+          <h3>Specialization in Artificial Intelligence and Data Science</h3>
+          <p>Escola Superior de Planejamento e Gestão (ESPG).</p>
+        </div>
+
+        <div class="card">
+          <span class="when">2018 to 2022</span>
+          <h3>BSc in Production Engineering</h3>
+          <p>Associação Caruaruense de Ensino Superior (ASCES-UNITA).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <p class="kicker">Publications</p>
+      <h2>Articles and proceedings</h2>
+
+      <ol class="pubs">
+        <li>
+          Silva, E. da, Economou, T., &amp; Silva, M. M. (2026).
+          A decision support system applied to dengue epidemiological surveillance: the DengueSphere platform.
+          <em>Proceedings of the 12th International Conference on Decision Support System Technology (ICDSST 2026)</em>, Plymouth, UK.
+        </li>
+        <li>
+          Silva, E. da &amp; Silva, M. M. (2026).
+          Combined approach between Value-Focused Thinking and the FITradeoff DSS for environmental surveillance of
+          <em>Aedes aegypti</em> in Recife, Brazil.
+          <em>LVIII Simpósio Brasileiro de Pesquisa Operacional (SBPO)</em>, Belo Horizonte.
+        </li>
+        <li>
+          Silva, E. da &amp; Silva, M. M. (2025).
+          Statistical modeling of dengue cases in Pernambuco: panel data and zero-inflated negative binomial regression.
+          <em>IX Encontro de Pesquisa e Pós-Graduação em Engenharia de Produção (EPPGEP)</em>, Porto Alegre.
+        </li>
+        <li>
+          Silva, E. da &amp; Silva, M. M. (2024).
+          Main machine learning tools applied to solid waste: a bibliometric study.
+          <em>ENEGEP 2024</em>, Porto Alegre.
+        </li>
+        <li>
+          Filho, J. M. P., Oliveira, H. M., Silva, E. da, Bernardo, L. F., &amp; Siqueira, Y. M. (2023).
+          Benefits of implementing Industry 4.0 through its tools: a literature review.
+          <em>ENEGEP 2023</em>, Fortaleza.
+        </li>
+        <li>
+          Filho, J. M. P., Silva, E. da, Silva, E. W. B. da, Oliveira, R. V. M. de, &amp; Oliveira, H. M. de (2022).
+          Industry 4.0 in production engineering: a bibliometric study.
+          <em>ENEGEP 2022</em>, Foz do Iguaçu.
+        </li>
+        <li>
+          Melo, M. O. B. C., Fonseca, D. C. F., Silva, E., Pereira Filho, J. M., &amp; Silva, M. V. A. O. (2019).
+          The business management in the model of the economy of communion: case study in Brazil.
+          <em>Iberoamerican Journal of Industrial Engineering</em>, 11, 77-91.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="projects" class="alt">
+    <div class="wrap">
+      <p class="kicker">Projects</p>
+      <h2>Software</h2>
+
+      <div class="project-list">
+        <div class="project">
+          <h3>DengueSphere</h3>
+          <p>Decision support platform for dengue surveillance in Brazil. Software registered with INPI (2025).</p>
+          <a href="https://dengue-sphere.streamlit.app/" target="_blank" rel="noopener">Open the application</a>
+        </div>
+
+        <div class="project">
+          <h3>Dengue News Intelligence</h3>
+          <p>News monitoring panel for dengue, developed at GPSID, UFPE. Software registered with INPI (2026).</p>
+          <a href="https://dni.labgpsid.com.br" target="_blank" rel="noopener">Open the dashboard</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <p class="kicker">Experience</p>
+      <h2>Work and teaching</h2>
+
+      <div class="two-col">
+        <ul class="timeline">
+          <li>
+            <span class="when">2026</span>
+            <strong>Research fellow (bolsista pesquisador), Banco Bradesco</strong>
+            <p>IEL Inova Talentos programme. Data science projects using machine learning, language models and monitoring dashboards.</p>
+          </li>
+          <li>
+            <span class="when">2024 to 2025</span>
+            <strong>Teaching assistant, Regression Analysis for Production (EP077)</strong>
+            <p>UFPE.</p>
+          </li>
+          <li>
+            <span class="when">2021</span>
+            <strong>Teaching monitor, Production Planning and Control</strong>
+            <p>ASCES-UNITA.</p>
+          </li>
+        </ul>
+
+        <div>
+          <h3>Awards</h3>
+          <ul class="simple-list">
+            <li>First place, Innovative Article category, IEL Inova Talentos Award (2026).</li>
+            <li>Outstanding student, PPGEP-UFPE, Master's dissertation category, ANPEPRO (2025).</li>
+          </ul>
+
+          <h3>Service</h3>
+          <ul class="simple-list">
+            <li>Peer reviewer, Journal of Decision Systems and Revista Produção Online (2026).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <p class="kicker">Contact</p>
+        <h2>Contact</h2>
+        <p>Open to research collaborations in applied data science, decision support and public health.</p>
+        <div class="btns">
+          <a class="btn solid" href="mailto:eduardo.es@ufpe.br">eduardo.es@ufpe.br</a>
+          <a class="btn" href="https://www.linkedin.com/in/eng-eduardo-silva/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/avlisedu" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  &copy; <span id="year"></span> Eduardo da Silva
+  <div class="wrap">
+    &copy; <span id="year"></span> Eduardo da Silva, Universidade Federal de Pernambuco
+  </div>
 </footer>
 
 <script>
