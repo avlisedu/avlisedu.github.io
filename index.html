@@ -1,66 +1,482 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eduardo da Silva | Engenheiro de Produção</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eduardo da Silva | Data Science and Decision Support</title>
+  <meta name="description" content="Eduardo da Silva, PhD candidate in Production Engineering at UFPE, researching data-driven decision support for dengue surveillance and public health." />
+  <meta name="author" content="Eduardo da Silva" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --surface: #ffffff;
+      --text: #1f2933;
+      --muted: #52606d;
+      --accent: #0e75b6;
+      --accent-soft: #e6f1f9;
+      --border: #e4e7eb;
+      --max: 860px;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1419;
+        --surface: #161c23;
+        --text: #e4e7eb;
+        --muted: #9aa5b1;
+        --accent: #5ab0e6;
+        --accent-soft: #1b2a36;
+        --border: #2a333d;
+        color-scheme: dark;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    header.site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-nav .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .brand { font-weight: 700; color: var(--text); }
+    .brand:hover { text-decoration: none; }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+      font-size: 0.92rem;
+    }
+
+    nav a { color: var(--muted); }
+    nav a:hover { color: var(--accent); text-decoration: none; }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    h1, h2, h3 { line-height: 1.25; }
+
+    h2 {
+      font-size: 1.6rem;
+      margin: 0 0 1.25rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .hero { padding: 4rem 0 3rem; }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .role {
+      font-size: 1.15rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 0 0 1rem;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .links a {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    ol.pubs, ul.plain {
+      padding-left: 1.2rem;
+    }
+
+    ol.pubs li, ul.plain li {
+      margin-bottom: 0.9rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.1rem 0.5rem;
+      border-radius: 4px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-left: 0.3rem;
+      vertical-align: middle;
+    }
+
+    .timeline li {
+      margin-bottom: 1rem;
+    }
+
+    .timeline .period {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    footer {
+      padding: 2rem 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.9rem; }
+      section { padding: 2.25rem 0; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Eduardo da Silva</h1>
-    <p>Doutorando em Engenharia de Produção</p>
-    <nav>
-      <a href="mailto:eduardo.es@ufpe.br">Email</a>
-      <a href="https://lattes.cnpq.br/9698302403435499" target="_blank">Lattes</a>
-      <a href="https://orcid.org/0000-0002-2455-2294" target="_blank">ORCID</a>
-      <a href="https://www.linkedin.com/in/eng-eduardo-silva/" target="_blank">LinkedIn</a>
+
+<header class="site-nav">
+  <div class="container">
+    <a class="brand" href="#top">Eduardo da Silva</a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#software">Software</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <section>
-      <h2>Resumo Profissional</h2>
-      <p>Mestre e Doutorando em Engenharia de Produção pela UFPE. Experiência com pesquisa, extensão e ensino nas áreas de Indústria 4.0, Decisão na Saúde, Logística e Qualidade. Membro do Grupo de Pesquisa em Sistemas de Informação e Decisão (GPSID).</p>
-    </section>
+<main id="top">
 
-    <section>
-      <h2>Formação Acadêmica</h2>
-      <ul>
-        <li><strong>Doutorado</strong> – Engenharia de Produção, UFPE (2025 - atual)</li>
-        <li><strong>Mestrado</strong> – Engenharia de Produção, UFPE (2023 - 2025)</li>
-        <li><strong>Graduação</strong> – Engenharia de Produção, ASCES (2018 - 2022)</li>
-        <li><strong>Graduação</strong> – Sistemas de Informação, UFRPE (2023)</li>
-        <li><strong>Especializações</strong> – IA, Docência, Data Science (USP, ESPG, UNIVITÓRIA)</li>
+  <div class="hero">
+    <div class="container">
+      <h1>Eduardo da Silva</h1>
+      <p class="role">PhD Candidate in Production Engineering, Universidade Federal de Pernambuco (UFPE)</p>
+      <p class="lead">
+        I develop data-driven decision support systems that combine epidemiological surveillance,
+        multicriteria decision-making, statistical modeling and machine learning. My current work
+        focuses on dengue surveillance and public health decisions in Brazil.
+      </p>
+      <div class="links">
+        <a href="http://lattes.cnpq.br/9698302403435499" target="_blank" rel="noopener">Lattes CV</a>
+        <a href="https://orcid.org/0000-0002-2455-2294" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://www.linkedin.com/in/eng-eduardo-silva/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/avlisedu" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:eduardo.es@ufpe.br">Email</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="container">
+      <h2>About</h2>
+      <p>
+        I hold a Bachelor's degree in Production Engineering from ASCES-UNITA and a Master's degree in
+        Production Engineering from UFPE, where my dissertation applied zero-inflated models and panel data
+        to dengue cases in Pernambuco. I am now a PhD candidate in the same program, with a sandwich
+        period at the University of Exeter under the co-supervision of Prof. Theo Economou.
+      </p>
+      <p>
+        I am a member of the Information Systems and Decision Research Group (GPSID), where I work on
+        decision support in health. I am also completing a specialization in Data Science and Analytics at
+        USP/ESALQ. I was approved in a public competitive examination for University Professor at the
+        Universidade de Pernambuco (UPE), in the area of operations administration, production administration,
+        logistics and technology.
+      </p>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="container">
+      <h2>Research Interests</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Epidemiological Surveillance</h3>
+          <p>Dengue surveillance, decision support systems for public health, and news monitoring for early alerting.</p>
+        </div>
+        <div class="card">
+          <h3>Multicriteria Decision-Making</h3>
+          <p>Value-Focused Thinking (VFT), FITradeoff and outranking methods such as PROMETHEE-ROC.</p>
+        </div>
+        <div class="card">
+          <h3>Statistical Modeling</h3>
+          <p>Count models, zero-inflated and panel data models, causal inference with difference-in-differences, and regression analysis.</p>
+        </div>
+        <div class="card">
+          <h3>Operations Research</h3>
+          <p>Mathematical programming, simulation, and prescriptive analytics for industrial and public management problems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="container">
+      <h2>Publications</h2>
+
+      <h3>Journal articles</h3>
+      <ol class="pubs">
+        <li>
+          Melo, M. O. B. C., Fonseca, D. C. F., <strong>Silva, E.</strong>, Pereira Filho, J. M., &amp; Silva, M. V. A. O. (2019).
+          The business management in the model of the economy of communion: case study in Brazil.
+          <em>Iberoamerican Journal of Industrial Engineering</em>, 11, 77-91.
+        </li>
+      </ol>
+
+      <h3>Conference proceedings</h3>
+      <ol class="pubs">
+        <li>
+          <strong>Silva, E. da</strong>, Economou, T., &amp; Silva, M. M. (2026).
+          A decision support system applied to dengue epidemiological surveillance: the DengueSphere platform.
+          In <em>Proceedings of the 12th International Conference on Decision Support System Technology (ICDSST 2026)</em>. Plymouth, UK.
+        </li>
+        <li>
+          <strong>Silva, E. da</strong> &amp; Silva, M. M. (2026).
+          Combined approach between Value-Focused Thinking and the FITradeoff DSS for decision support in environmental surveillance of <em>Aedes aegypti</em> in Recife, Brazil.
+          In <em>LVIII Simpósio Brasileiro de Pesquisa Operacional (SBPO)</em>. Belo Horizonte, Brazil.
+        </li>
+        <li>
+          <strong>Silva, E. da</strong> &amp; Silva, M. M. (2025).
+          Statistical modeling of dengue cases in Pernambuco: an approach with panel data and zero-inflated negative binomial regression.
+          In <em>IX Encontro de Pesquisa e Pós-Graduação em Engenharia de Produção (EPPGEP)</em>. Porto Alegre, Brazil.
+        </li>
+        <li>
+          <strong>Silva, E. da</strong> &amp; Silva, M. M. (2024).
+          Main machine learning tools applied to solid waste: a bibliometric study.
+          In <em>Encontro Nacional de Engenharia de Produção (ENEGEP 2024)</em>. Porto Alegre, Brazil.
+        </li>
+        <li>
+          Filho, J. M. P., Oliveira, H. M., <strong>Silva, E. da</strong>, Bernardo, L. F., &amp; Siqueira, Y. M. (2023).
+          Benefits of implementing Industry 4.0 through its tools: a literature review.
+          In <em>Encontro Nacional de Engenharia de Produção (ENEGEP 2023)</em>. Fortaleza, Brazil.
+        </li>
+        <li>
+          Filho, J. M. P., <strong>Silva, E. da</strong>, Silva, E. W. B. da, Oliveira, R. V. M. de, &amp; Oliveira, H. M. de (2022).
+          Industry 4.0 in production engineering: a bibliometric study.
+          In <em>Encontro Nacional de Engenharia de Produção (ENEGEP 2022)</em>. Foz do Iguaçu, Brazil.
+        </li>
+      </ol>
+
+      <h3>Presentations</h3>
+      <ul class="plain">
+        <li>Structuring problems with Value-Focused Thinking in operations research (2026). Talk.</li>
+        <li>Solid waste and sanitation interaction in dengue incidence using multiple linear regression (2024). Symposium presentation.</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <section>
-      <h2>Experiência Profissional</h2>
-      <ul>
-        <li><strong>UFPE</strong> – Bolsista de pesquisa e docência</li>
-        <li><strong>Provider Soluções Tecnológicas</strong> – Supervisor Operacional</li>
-        <li><strong>MassaFest</strong> – Estágio em Qualidade</li>
-        <li><strong>Rochedo Refrigerantes</strong> – Estágio em Logística</li>
+  <section id="software">
+    <div class="container">
+      <h2>Software and Registrations</h2>
+      <div class="card">
+        <h3>DengueSphere v1.0 <span class="badge">INPI 2025</span></h3>
+        <p>
+          Decision support platform for dengue epidemiological surveillance in Brazil.
+          Registered as computer software with INPI (2025), together with Prof. Maisa Mendonça Silva.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Radar da Dengue (RD) <span class="badge">INPI 2026</span></h3>
+        <p>
+          Dengue news intelligence dashboard developed at GPSID to monitor dengue coverage in the news.
+          Registered as computer software with INPI (2026).
+          Live version: <a href="https://dni.labgpsid.com.br" target="_blank" rel="noopener">dni.labgpsid.com.br</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="awards">
+    <div class="container">
+      <h2>Awards and Honors</h2>
+      <ul class="plain timeline">
+        <li>
+          <span class="period">2026</span>
+          First place, Innovative Article category, IEL Inova Talentos Award, for a study on reducing the cognitive effort of writing unit tests in data pipelines with LLMs and GitHub Copilot.
+        </li>
+        <li>
+          <span class="period">2025</span>
+          Outstanding student recognition from PPGEP-UFPE (Master's dissertation category), by ANPEPRO (EPPGEP).
+        </li>
+        <li>
+          <span class="period">2022</span>
+          Second place, XVIII Scientific Initiation Symposium, Centro Universitário Tabosa de Almeida (ASCES).
+        </li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <section>
-      <h2>Habilidades Técnicas</h2>
-      <p>R, Power BI, Python, SQL, JavaScript, C++, PHP, React</p>
-    </section>
-
-    <section>
-      <h2>Idiomas</h2>
-      <ul>
-        <li><strong>Português</strong>: Fluente</li>
-        <li><strong>Inglês</strong>: Intermediário (IELTS B1)</li>
+  <section id="teaching">
+    <div class="container">
+      <h2>Teaching and Service</h2>
+      <ul class="plain">
+        <li>Teaching assistantship (estágio de docência), Regression Analysis for Production (EP077), UFPE, 2024-2025.</li>
+        <li>Teaching monitor, Production Planning and Control, ASCES-UNITA (2021).</li>
+        <li>Peer reviewer for the <em>Journal of Decision Systems</em> (2026-present) and <em>Revista Produção Online</em> (2026-present).</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      <p>&copy; 2025 Eduardo da Silva. Todos os direitos reservados.</p>
-    </footer>
-  </main>
+  <section id="education">
+    <div class="container">
+      <h2>Education</h2>
+      <ul class="plain timeline">
+        <li>
+          <span class="period">2025 to present</span>
+          <strong>PhD in Production Engineering</strong>, Universidade Federal de Pernambuco (UFPE).<br />
+          Sandwich period at the University of Exeter. Advisor: Prof. Maisa Mendonça Silva. Co-advisor: Prof. Theo Economou.<br />
+          Thesis: <em>A Data-Driven Approach to Dengue Surveillance and Public Health Decision Support</em>.
+        </li>
+        <li>
+          <span class="period">2023 to 2025</span>
+          <strong>MSc in Production Engineering</strong>, Universidade Federal de Pernambuco (UFPE).<br />
+          Advisor: Prof. Maisa Mendonça Silva.<br />
+          Dissertation: <em>Statistical Modeling of Dengue Cases in Pernambuco: An Approach with Zero-Inflated Models and Panel Data</em>.
+        </li>
+        <li>
+          <span class="period">2025 (in progress)</span>
+          <strong>Specialization in Data Science and Analytics</strong>, Universidade de São Paulo (USP/ESALQ).<br />
+          Monograph: logistic regression analysis of factors associated with sleep quality.
+        </li>
+        <li>
+          <span class="period">2023 to 2024</span>
+          <strong>Specialization in Artificial Intelligence and Data Science</strong>, Escola Superior de Planejamento e Gestão (ESPG).
+        </li>
+        <li>
+          <span class="period">2024 to 2025</span>
+          <strong>Specialization in Teaching of Science and Information Technology</strong>, UNIVITORIA.
+        </li>
+        <li>
+          <span class="period">2018 to 2022</span>
+          <strong>BSc in Production Engineering</strong>, Associação Caruaruense de Ensino Superior (ASCES-UNITA).<br />
+          Thesis: benefits of implementing Industry 4.0 through its tools, a literature review.
+        </li>
+      </ul>
+
+      <h3>Selected training</h3>
+      <ul class="plain">
+        <li>Artificial Intelligence in health system management (SUS), UFPB (2026, 180h).</li>
+        <li>LaTeX course for exact sciences, UTFPR (2026, 50h).</li>
+        <li>Probability and Statistics Fundamentals for Data Science, USP (2026, 30h).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Languages</h2>
+      <ul class="plain">
+        <li>Portuguese: native.</li>
+        <li>English: Duolingo English Test, score 105 (CEFR B2).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Open to research collaborations in applied data science, decision support, and public health.</p>
+      <div class="links">
+        <a href="mailto:eduardo.es@ufpe.br">eduardo.es@ufpe.br</a>
+        <a href="https://www.linkedin.com/in/eng-eduardo-silva/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="http://lattes.cnpq.br/9698302403435499" target="_blank" rel="noopener">Lattes</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    &copy; <span id="year"></span> Eduardo da Silva. Universidade Federal de Pernambuco.
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
