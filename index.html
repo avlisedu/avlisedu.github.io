@@ -290,6 +290,46 @@
     .method strong { display: block; color: var(--ink); margin-bottom: 0.2rem; }
     .method span { color: var(--ink-soft); font-size: 0.93rem; }
 
+    /* Education */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .edu-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.4rem 1.5rem;
+    }
+    .edu-item.main {
+      grid-column: 1 / -1;
+      background: var(--grad);
+      border: none;
+      color: #fff;
+    }
+    .edu-item .when {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--azure);
+      margin-bottom: 0.4rem;
+    }
+    .edu-item.main .when { color: #9ce9ec; }
+    .edu-item h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.3rem;
+      line-height: 1.3;
+      margin: 0 0 0.4rem;
+      color: var(--ink);
+    }
+    .edu-item.main h3 { color: #fff; font-size: 1.6rem; }
+    .edu-item p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+    .edu-item.main p { color: #d7e6f3; }
+
     /* Publications */
     .pubs { list-style: none; padding: 0; margin: 0; counter-reset: p; }
     .pubs li {
@@ -409,7 +449,7 @@
     }
 
     @media (max-width: 900px) {
-      .hero .wrap { grid-template-columns: 1fr; text-align: left; }
+      .hero .wrap { grid-template-columns: 1fr; }
       .portrait { width: 200px; height: 200px; order: -1; }
       .research-grid, .split { grid-template-columns: 1fr; gap: 2rem; }
     }
@@ -428,10 +468,11 @@
     <a class="brand" href="#top">Eduardo da Silva</a>
     <nav aria-label="Primary">
       <ul>
+        <li><a href="#education">Education</a></li>
         <li><a href="#work">Work</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#publications">Publications</a></li>
-        <li><a href="#background">Background</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -443,7 +484,7 @@
   <div class="hero">
     <div class="wrap">
       <div>
-        <p class="eyebrow">PhD Candidate · Production Engineering · UFPE</p>
+        <p class="eyebrow">PhD candidate in Production Engineering at UFPE</p>
         <h1>Data-driven decisions for public health and operations</h1>
         <p class="lead">
           I combine statistical modeling, multicriteria decision methods and machine learning to help
@@ -515,6 +556,70 @@
     </div>
   </div>
 
+  <section id="education" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Education</p>
+        <h2>Academic training</h2>
+      </div>
+
+      <div class="edu-grid">
+        <div class="edu-item main">
+          <span class="when">2025 to present</span>
+          <h3>PhD in Production Engineering</h3>
+          <p>
+            Universidade Federal de Pernambuco (UFPE), with a sandwich period at the University of Exeter.
+            Advisor: Prof. Maisa Mendonça Silva. Co-advisor: Prof. Theo Economou.
+            Thesis: A Data-Driven Approach to Dengue Surveillance and Public Health Decision Support.
+          </p>
+        </div>
+
+        <div class="edu-item">
+          <span class="when">2023 to 2025</span>
+          <h3>MSc in Production Engineering</h3>
+          <p>
+            Universidade Federal de Pernambuco (UFPE). Advisor: Prof. Maisa Mendonça Silva. Dissertation on
+            zero-inflated models and panel data for dengue cases in Pernambuco.
+          </p>
+        </div>
+
+        <div class="edu-item">
+          <span class="when">2025, in progress</span>
+          <h3>Specialization in Data Science and Analytics</h3>
+          <p>Universidade de São Paulo (USP/ESALQ). Monograph on logistic regression and factors associated with sleep quality.</p>
+        </div>
+
+        <div class="edu-item">
+          <span class="when">2023 to 2024</span>
+          <h3>Specialization in Artificial Intelligence and Data Science</h3>
+          <p>Escola Superior de Planejamento e Gestão (ESPG).</p>
+        </div>
+
+        <div class="edu-item">
+          <span class="when">2024 to 2025</span>
+          <h3>Specialization in Teaching of Science and Information Technology</h3>
+          <p>UNIVITORIA.</p>
+        </div>
+
+        <div class="edu-item">
+          <span class="when">2018 to 2022</span>
+          <h3>BSc in Production Engineering</h3>
+          <p>
+            Associação Caruaruense de Ensino Superior (ASCES-UNITA). Thesis on the benefits of implementing
+            Industry 4.0 through its tools, a literature review.
+          </p>
+        </div>
+      </div>
+
+      <p class="sub-head">Selected training</p>
+      <ul class="list-plain">
+        <li>Artificial Intelligence in health system management (SUS), UFPB, 2026, 180h.</li>
+        <li>LaTeX course for exact sciences, UTFPR, 2026, 50h.</li>
+        <li>Probability and Statistics Fundamentals for Data Science, USP, 2026, 30h.</li>
+      </ul>
+    </div>
+  </section>
+
   <section id="work">
     <div class="wrap">
       <div class="section-head">
@@ -525,7 +630,7 @@
 
       <div class="cards">
         <article class="card">
-          <span class="tag">Software · INPI 2025</span>
+          <span class="tag">Software, INPI 2025</span>
           <h3>DengueSphere</h3>
           <p>
             A decision support platform for dengue epidemiological surveillance in Brazil, developed with
@@ -535,7 +640,7 @@
         </article>
 
         <article class="card">
-          <span class="tag">Software · INPI 2026</span>
+          <span class="tag">Software, INPI 2026</span>
           <h3>Dengue News Intelligence</h3>
           <p>
             A monitoring panel developed at GPSID that tracks dengue coverage in the news, classifies it with
@@ -545,7 +650,7 @@
         </article>
 
         <article class="card">
-          <span class="tag">Method · 2026</span>
+          <span class="tag">Method, 2026</span>
           <h3>VFT and FITradeoff for vector control</h3>
           <p>
             A combined approach that structures objectives with Value-Focused Thinking and ranks control
@@ -653,37 +758,27 @@
     </div>
   </section>
 
-  <section id="background" class="alt">
+  <section id="experience" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <p class="kicker">Background</p>
+        <p class="kicker">Experience</p>
         <h2>Trajectory</h2>
       </div>
 
       <div class="split">
         <ul class="timeline">
           <li>
-            <span class="when">2025 to present</span>
-            <strong>PhD in Production Engineering, UFPE</strong>
-            <p>Sandwich period at the University of Exeter. Advisor: Prof. Maisa Mendonça Silva. Co-advisor: Prof. Theo Economou.</p>
-          </li>
-          <li>
             <span class="when">2026</span>
             <strong>Research fellow (bolsista pesquisador), Banco Bradesco</strong>
             <p>IEL Inova Talentos programme. Data science projects on emerging and consolidated techniques, including machine learning, language models and monitoring dashboards.</p>
           </li>
           <li>
-            <span class="when">2023 to 2025</span>
-            <strong>MSc in Production Engineering, UFPE</strong>
-            <p>Dissertation on zero-inflated models and panel data for dengue in Pernambuco.</p>
+            <span class="when">2024 to 2025</span>
+            <strong>Teaching assistant, Regression Analysis for Production (EP077), UFPE</strong>
           </li>
           <li>
-            <span class="when">2025, in progress</span>
-            <strong>Specialization in Data Science and Analytics, USP/ESALQ</strong>
-          </li>
-          <li>
-            <span class="when">2018 to 2022</span>
-            <strong>BSc in Production Engineering, ASCES-UNITA</strong>
+            <span class="when">2021</span>
+            <strong>Teaching monitor, Production Planning and Control, ASCES-UNITA</strong>
           </li>
         </ul>
 
@@ -695,9 +790,8 @@
             <li>Approved in a public competitive examination for University Professor, Universidade de Pernambuco (UPE).</li>
           </ul>
 
-          <h3 style="margin-top: 2rem;">Teaching and service</h3>
+          <h3 style="margin-top: 2rem;">Service</h3>
           <ul class="list-plain">
-            <li>Teaching assistant, Regression Analysis for Production (EP077), UFPE (2024 to 2025).</li>
             <li>Peer reviewer, <em>Journal of Decision Systems</em> and <em>Revista Produção Online</em> (2026).</li>
           </ul>
         </div>
